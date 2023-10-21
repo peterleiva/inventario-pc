@@ -9,39 +9,43 @@ namespace Projeto
         static void Main(string[] args)
         {
             var menu = new Menu();
-            menu.add(new MenuItem("Software", "Software", new Action(software)));
+            menu.add(new MenuItem("Software", "Software", new Func<string>(software)));
 
-            menu.add(new MenuItem("Hardware", "Hardware", new Action(hardware)));
+            menu.add(new MenuItem("Hardware", "Hardware", new Func<string>(hardware)));
 
-            menu.add(new MenuItem("Hardware e Software", "Hardware e Software", () =>
+            menu.add(new MenuItem("Hardware_Software", "Hardware e Software", () =>
             {
-                software();
-                hardware();
+                string content = string.Empty;
+                content += software();
+                content += hardware();
+
+                return content;
 
             }));
 
             menu.run();
         }
 
-        static private void software()
+        static string software()
         {
             Console.WriteLine("OS Version: " + Environment.OSVersion);
 
             Process[] runningProcesses = Process.GetProcesses();
 
-            Console.WriteLine("List of Running Processes:");
+            string info = "List of Running Processes:\n";
+
             foreach (var process in runningProcesses)
             {
                 try
                 {
-                    Console.WriteLine($"Process Name: {process.ProcessName}");
-                    Console.WriteLine($"Process ID: {process.Id}");
-                    Console.WriteLine($"Main Module File Name: {process.MainModule.FileName}");
-                    Console.WriteLine($"Start Time: {process.StartTime}");
-                    Console.WriteLine($"Responding: {process.Responding}");
-                    Console.WriteLine($"Memory Usage: {process.WorkingSet64 / 1024} KB");
-                    Console.WriteLine($"Total Processor Time: {process.TotalProcessorTime}");
-                    Console.WriteLine("-----------------------------------------------------");
+                    info += "Process Name: " + process.ProcessName + '\n';
+                    info += "Process ID: " + process.Id + '\n';
+                    info += "Main Module File Name: " + process.MainModule.FileName + '\n';
+                    info += "Start Time: " + process.StartTime + '\n';
+                    info += "Responding: " + process.Responding + '\n';
+                    info += "Memory Usage: " + process.WorkingSet64 / 1024 + " KB" + '\n';
+                    info += "Total Processor Time: " + process.TotalProcessorTime + '\n';
+                    info += "----------------------- " + '\n';
                 }
                 catch (Exception ex)
                 {
@@ -49,13 +53,19 @@ namespace Projeto
                 }
             }
 
+            Console.WriteLine(info);
+            return info;
+
         }
 
-        static private void hardware()
+        static private string hardware()
         {
-            Console.WriteLine("Machine Name: " + Environment.MachineName);
-            Console.WriteLine("OS Version: " + Environment.OSVersion);
-            Console.WriteLine("User Name: " + Environment.UserName);
+            string info = "Hardware Information:\n";
+            info += "Machine Name: " + Environment.MachineName + '\n';
+            info += "OS Version: " + Environment.OSVersion + '\n';
+            info += "User Name: " + Environment.UserName + '\n';
+
+            return info;
         }
     }
 }

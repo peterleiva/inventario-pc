@@ -4,7 +4,7 @@ class MenuItem
     private string? _name;
 
 
-    private Action? _action;
+    private Func<string>? _action;
 
     public string? Description
     {
@@ -18,7 +18,7 @@ class MenuItem
         set { _name = value; }
     }
 
-    public Action? Action
+    public Func<string>? Action
     {
         get { return _action; }
         set { _action = value; }
@@ -28,7 +28,7 @@ class MenuItem
     {
     }
 
-    public MenuItem(string name, string description, Action action)
+    public MenuItem(string name, string description, Func<string> action)
     {
         _name = name;
         _description = description;

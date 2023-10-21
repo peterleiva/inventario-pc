@@ -39,7 +39,12 @@ class Menu
             if (choice - 1 >= 0 && choice - 1 < _options.Count)
             {
 
-                _options.ElementAt(choice - 1).Action();
+                MenuItem item = _options.ElementAt(choice - 1);
+
+                string filename = item.Name + ".dat";
+                string content = item.Action();
+
+                store(filename, content);
             }
             else
             {
@@ -47,6 +52,15 @@ class Menu
             }
 
         } while (choice != 0);
+    }
+
+    public void store(string filename, string content)
+    {
+        var file = new StreamWriter(filename);
+
+        file.Write(content);
+
+        file.Close();
     }
 
     public int dataInput()
