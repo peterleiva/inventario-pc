@@ -7,7 +7,7 @@ Script C# que exibe um menu com a escolha de coletar informações sobre o Harwa
 
 ## Rodando o projeto
 
-Para rodar o projeto, só utilizando `Dotnet 7.0`:
+Para rodar o projeto, só utilizando `.NET 7.0`:
 
 ```bash
 dotnet run
