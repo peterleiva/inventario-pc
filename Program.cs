@@ -92,6 +92,22 @@ namespace Projeto
             }
 
             info += "\n\n" + "Dispositivos de Entrada e Saída: " + '\n';
+            // Informações sobre discos
+            ManagementObjectSearcher diskSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk");
+            ManagementObjectCollection diskCollection = diskSearcher.Get();
+
+            foreach (ManagementObject obj in diskCollection)
+            {
+                ulong tamanhoTotalEmBytes = Convert.ToUInt64(obj["Size"]);
+                ulong espacoDisponivelEmBytes = Convert.ToUInt64(obj["FreeSpace"]);
+                double tamanhoTotalEmGBs = tamanhoTotalEmBytes / Math.Pow(2, 30);
+                double espacoDisponivelEmGBs = espacoDisponivelEmBytes / Math.Pow(2, 30);
+
+                info += $"Disco: {obj["Name"]} - Tamanho Total (GB): {tamanhoTotalEmGBs:F2} GB - Disponível: {espacoDisponivelEmGBs:F2} GB \n\n";
+
+            }
+
+
 
 
             // Informações sobre dispositivos de entrada e saída
@@ -103,6 +119,8 @@ namespace Projeto
             {
                 info += "Dispositivo: " + obj["Description"] + '\n';
             }
+
+            info += "\n Informações de Discos:\n";
 
 
             Console.WriteLine(info);
