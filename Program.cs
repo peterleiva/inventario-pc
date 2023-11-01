@@ -91,7 +91,7 @@ namespace Projeto
                 info += "Memória em Uso: " + memoriaFormatada + '\n';
             }
 
-            info += "\n\n" + "Dispositivos de Entrada e Saída: " + '\n';
+            info += "\n\n" + "Informações de Disco: " + '\n';
             // Informações sobre discos
             ManagementObjectSearcher diskSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk");
             ManagementObjectCollection diskCollection = diskSearcher.Get();
@@ -114,7 +114,7 @@ namespace Projeto
             ManagementObjectSearcher ioDeviceSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity");
             ManagementObjectCollection ioDeviceCollection = ioDeviceSearcher.Get();
 
-            info += "\nDispositivos de Entrada e Saída:";
+            info += "\nDispositivos de Entrada e Saída:\n";
             foreach (ManagementObject obj in ioDeviceCollection)
             {
                 info += "Dispositivo: " + obj["Description"] + '\n';
