@@ -38,8 +38,6 @@ namespace Projeto
             info += $"Nome da Máquina: {Environment.MachineName}\n";
             info += $"Versão do SO: {0} {Environment.OSVersion.ToString()}\n";
             info += $"Diretório do Sistema: {Environment.SystemDirectory}\n";
-            info += $"Nome de Domínio do Usuário: {Environment.UserDomainName}\n";
-            info += $"Usuário Interativo: {Environment.UserInteractive}\n";
             info += $"Nome de Usuário: {Environment.UserName}\n";
             info += $"Versão: {Environment.Version.ToString()}\n";
 
