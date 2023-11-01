@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Management;
 
 
@@ -17,7 +16,9 @@ namespace Projeto
             menu.add(new MenuItem("Hardware_Software", "Hardware e Software", () =>
             {
                 string content = string.Empty;
+                content = $"\n\n----------Software------------\n\n";
                 content += software();
+                content = $"\n\n----------Hardware-------------\n\n";
                 content += hardware();
 
                 return content;
