@@ -67,6 +67,18 @@ namespace Projeto
                 info += "Núcleos: " + obj["NumberOfCores"] + '\n';
             }
 
+            info += "\n\n" + "Informações sobre Placa mãe: " + '\n';
+
+            ManagementObjectSearcher searcher2 = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+            ManagementObjectCollection collection2 = searcher2.Get();
+            foreach (ManagementObject obj in collection2)
+            {
+                info += $"Fabricante da Placa Mãe: {obj["Manufacturer"]}\n"
+                info += $"Produto da Placa Mãe: {obj["Product"]}\n"
+                info += $"Número de Série da Placa Mãe: {obj["SerialNumber"]}\n"
+            }
+
+
             info += "\n\n" + "Informações sobre Memória: " + '\n';
 
             ManagementObjectSearcher memorySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
@@ -119,8 +131,6 @@ namespace Projeto
             {
                 info += "Dispositivo: " + obj["Description"] + '\n';
             }
-
-            info += "\n Informações de Discos:\n";
 
 
             Console.WriteLine(info);
