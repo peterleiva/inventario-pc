@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Management;
 
 
@@ -30,30 +31,10 @@ namespace Projeto
 
         static string software()
         {
-            Console.WriteLine("OS Version: " + Environment.OSVersion);
+            string info = $"\n\nSistema Operacional:\n";
 
-            Process[] runningProcesses = Process.GetProcesses();
+            info += $"OS Version: {Environment.OSVersion}\n";
 
-            string info = "List of Running Processes:\n";
-
-            foreach (var process in runningProcesses)
-            {
-                try
-                {
-                    info += "Process Name: " + process.ProcessName + '\n';
-                    info += "Process ID: " + process.Id + '\n';
-                    info += "Main Module File Name: " + process.MainModule.FileName + '\n';
-                    info += "Start Time: " + process.StartTime + '\n';
-                    info += "Responding: " + process.Responding + '\n';
-                    info += "Memory Usage: " + process.WorkingSet64 / 1024 + " KB" + '\n';
-                    info += "Total Processor Time: " + process.TotalProcessorTime + '\n';
-                    info += "----------------------- " + '\n';
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error accessing process information: {ex.Message}");
-                }
-            }
 
             Console.WriteLine(info);
             return info;
