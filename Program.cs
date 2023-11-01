@@ -89,7 +89,7 @@ namespace Projeto
                 var memoriaEmBytes = (ulong)obj["TotalPhysicalMemory"];
                 double memoriaEmMegabytes = (double)memoriaEmBytes / (1024 * 1024);
                 string memoriaFormatada = memoriaEmMegabytes.ToString("0.##") + "MB";
-                info += "Memória em Uso: " + memoriaFormatada + '\n';
+                info += "Memória Total: " + memoriaFormatada + '\n';
             }
 
             ManagementObjectSearcher memoryUsageSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
