@@ -66,12 +66,16 @@ namespace Projeto
 
             string info = string.Empty;
 
+            info += "\n\n" + "Informações sobre o Processador: " + '\n';
+
             foreach (ManagementObject obj in collection)
             {
                 info += "Nome do Processador: " + obj["Name"];
                 info += "Fabricante: " + obj["Manufacturer"];
                 info += "Núcleos: " + obj["NumberOfCores"];
             }
+
+            info += "\n\n" + "Informações sobre Memória: " + '\n';
 
             ManagementObjectSearcher memorySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
             ManagementObjectCollection memoryCollection = memorySearcher.Get();
@@ -94,6 +98,9 @@ namespace Projeto
                 string memoriaFormatada = memoriaEmMegabytes.ToString("0.##") + "MB";
                 info += "Memória em Uso: " + memoriaFormatada;
             }
+
+            info += "\n\n" + "Dispositivos de Entrada e Saída: " + '\n';
+
 
             // Informações sobre dispositivos de entrada e saída
             ManagementObjectSearcher ioDeviceSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity");
