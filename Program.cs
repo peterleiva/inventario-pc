@@ -19,7 +19,7 @@ namespace Projeto
                 string content = string.Empty;
                 content = $"\n\n----------Software------------\n\n";
                 content += software();
-                content = $"\n\n----------Hardware-------------\n\n";
+                content += $"\n\n----------Hardware-------------\n\n";
                 content += hardware();
 
                 return content;
