@@ -73,9 +73,9 @@ namespace Projeto
             ManagementObjectCollection collection2 = searcher2.Get();
             foreach (ManagementObject obj in collection2)
             {
-                info += $"Fabricante da Placa Mãe: {obj["Manufacturer"]}\n"
-                info += $"Produto da Placa Mãe: {obj["Product"]}\n"
-                info += $"Número de Série da Placa Mãe: {obj["SerialNumber"]}\n"
+                info += $"Fabricante da Placa Mãe: {obj["Manufacturer"]}\n";
+                info += $"Produto da Placa Mãe: {obj["Product"]}\n";
+                info += $"Número de Série da Placa Mãe: {obj["SerialNumber"]}\n";
             }
 
 
