@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Management;
 
 
 namespace Projeto
@@ -60,11 +61,52 @@ namespace Projeto
 
         static private string hardware()
         {
-            string info = "Hardware Information:\n";
-            info += "Machine Name: " + Environment.MachineName + '\n';
-            info += "OS Version: " + Environment.OSVersion + '\n';
-            info += "User Name: " + Environment.UserName + '\n';
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            ManagementObjectCollection collection = searcher.Get();
 
+            string info = string.Empty;
+
+            foreach (ManagementObject obj in collection)
+            {
+                info += "Nome do Processador: " + obj["Name"];
+                info += "Fabricante: " + obj["Manufacturer"];
+                info += "Núcleos: " + obj["NumberOfCores"];
+            }
+
+            ManagementObjectSearcher memorySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
+            ManagementObjectCollection memoryCollection = memorySearcher.Get();
+
+            foreach (ManagementObject obj in memoryCollection)
+            {
+                var memoriaEmBytes = (ulong)obj["TotalPhysicalMemory"];
+                double memoriaEmMegabytes = (double)memoriaEmBytes / (1024 * 1024);
+                string memoriaFormatada = memoriaEmMegabytes.ToString("0.##") + "MB";
+                info += "Memória em Uso: " + memoriaFormatada;
+            }
+
+            ManagementObjectSearcher memoryUsageSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+            ManagementObjectCollection memoryUsageCollection = memoryUsageSearcher.Get();
+
+            foreach (ManagementObject obj in memoryUsageCollection)
+            {
+                var memoriaEmBytes = (ulong)obj["TotalVisibleMemorySize"];
+                double memoriaEmMegabytes = (double)memoriaEmBytes / (1024 * 1024);
+                string memoriaFormatada = memoriaEmMegabytes.ToString("0.##") + "MB";
+                info += "Memória em Uso: " + memoriaFormatada;
+            }
+
+            // Informações sobre dispositivos de entrada e saída
+            ManagementObjectSearcher ioDeviceSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity");
+            ManagementObjectCollection ioDeviceCollection = ioDeviceSearcher.Get();
+
+            info += "\nDispositivos de Entrada e Saída:";
+            foreach (ManagementObject obj in ioDeviceCollection)
+            {
+                info += "Dispositivo: " + obj["Description"];
+            }
+
+
+            Console.WriteLine(info);
             return info;
         }
     }
