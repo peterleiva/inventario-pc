@@ -70,9 +70,9 @@ namespace Projeto
 
             foreach (ManagementObject obj in collection)
             {
-                info += "Nome do Processador: " + obj["Name"];
-                info += "Fabricante: " + obj["Manufacturer"];
-                info += "Núcleos: " + obj["NumberOfCores"];
+                info += "Nome do Processador: " + obj["Name"] + '\n';
+                info += "Fabricante: " + obj["Manufacturer"] + '\n';
+                info += "Núcleos: " + obj["NumberOfCores"] + '\n';
             }
 
             info += "\n\n" + "Informações sobre Memória: " + '\n';
@@ -85,7 +85,7 @@ namespace Projeto
                 var memoriaEmBytes = (ulong)obj["TotalPhysicalMemory"];
                 double memoriaEmMegabytes = (double)memoriaEmBytes / (1024 * 1024);
                 string memoriaFormatada = memoriaEmMegabytes.ToString("0.##") + "MB";
-                info += "Memória em Uso: " + memoriaFormatada;
+                info += "Memória em Uso: " + memoriaFormatada + '\n';
             }
 
             ManagementObjectSearcher memoryUsageSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
@@ -96,7 +96,7 @@ namespace Projeto
                 var memoriaEmBytes = (ulong)obj["TotalVisibleMemorySize"];
                 double memoriaEmMegabytes = (double)memoriaEmBytes / (1024 * 1024);
                 string memoriaFormatada = memoriaEmMegabytes.ToString("0.##") + "MB";
-                info += "Memória em Uso: " + memoriaFormatada;
+                info += "Memória em Uso: " + memoriaFormatada + '\n';
             }
 
             info += "\n\n" + "Dispositivos de Entrada e Saída: " + '\n';
