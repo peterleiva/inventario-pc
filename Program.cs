@@ -109,7 +109,7 @@ namespace Projeto
             info += "\nDispositivos de Entrada e Saída:";
             foreach (ManagementObject obj in ioDeviceCollection)
             {
-                info += "Dispositivo: " + obj["Description"];
+                info += "Dispositivo: " + obj["Description"] + '\n';
             }
 
 
